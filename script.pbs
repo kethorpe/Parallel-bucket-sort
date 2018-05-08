@@ -1,0 +1,28 @@
+#PBS -N main
+
+#PBS -q q30m32c
+
+#PBS -j oe
+
+#PBS -m abe
+
+#PBS -M kethorpe@uark.edu
+
+#PBS -o MAIN.$PBS_JOBID
+
+#PBS -l nodes=2:ppn=32
+
+#PBS -l walltime=00:02:00
+
+
+
+cd $PBS_O_WORKDIR
+
+echo "workdir is: $PBS_O_WORKDIR"
+
+cp main.x /scratch/$PBS_JOBID
+
+cd /scratch/$PBS_JOBID
+
+
+mpirun -np 64 -machinefile $PBS_NODEFILE main.x
